@@ -1,0 +1,37 @@
+.navLink {
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 500;
+    position: relative;
+}
+
+.navLink::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.25s ease-out;
+    }
+    
+.navLink:hover::before {
+    width: 100%;
+}
+
+.nav-link {
+    padding: 0.05;
+}
+
+.navTitle {
+    text-decoration: none;
+}
+
+.normal-weight {
+    font-weight: 500;
+  }
+  
+  .bold-weight {
+    font-weight: 750;
+  }
