@@ -3,6 +3,7 @@ import "./App.css";
 import 'bootstrap/dist/js/bootstrap.bundle';
 import Navbar from "./components/Navbar";
 import AddBook from "./components/AddBook";
+import FindBook from "./components/FindBook";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <div className="bottomContainer">
         <Routes>
           <Route exact path="/addBook" element={<AddBook />}></Route>
+          <Route exact path="/findBook" element={<FindBook />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
