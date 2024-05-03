@@ -3,6 +3,8 @@
     margin: 0 15px;
     font-weight: 500;
     position: relative;
+    color: black;
+    padding-bottom: 3px;
 }
 
 .navLink::before {
@@ -11,7 +13,7 @@
     left: 0;
     bottom: 0;
     width: 0;
-    height: 2px;
+    height: 1.5px;
     background-color: black;
     transition: width 0.25s ease-out;
     }
@@ -26,10 +28,12 @@
 
 .navTitle {
     text-decoration: none;
+    color: black;
+    margin: 0 15px 0 0;
 }
 
 .normal-weight {
-    font-weight: 500;
+    font-weight: 400;
   }
   
   .bold-weight {
