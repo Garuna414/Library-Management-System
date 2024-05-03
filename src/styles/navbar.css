@@ -5,6 +5,7 @@
     position: relative;
     color: black;
     padding-bottom: 3px;
+    font-family: monospace;
 }
 
 .navLink::before {
@@ -30,6 +31,7 @@
     text-decoration: none;
     color: black;
     margin: 0 15px 0 0;
+    font-family: monospace;
 }
 
 .normal-weight {

@@ -1,6 +1,32 @@
 .addBookMainContainer {
-    height: calc(100vh - 40px);    
+    height: calc(100vh - 41.6px);    
     background: linear-gradient(45deg, #6369D1, #60E1E0, #D8D2E1);
     width: 100vw;
     padding: 15px;
+}
+
+h1 {
+    font-family: monospace;
+}
+
+.labelText {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: monospace;
+}
+
+.formInput {
+    width: 300px;
+    border-radius: 10px;
+    padding: 0 15px;
+}
+
+.submitBtn {
+    border-radius: 10px;
+    width: 150px;
+    font-family: monospace;
+}
+
+.submitBtn:hover {
+    background-color: rgba(255, 255, 255, 0.7);
 }
