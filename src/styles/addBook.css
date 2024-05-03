@@ -19,6 +19,7 @@ h1 {
     width: 300px;
     border-radius: 10px;
     padding: 0 15px;
+    font-family: monospace;
 }
 
 .submitBtn {

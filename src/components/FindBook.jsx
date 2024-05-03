@@ -24,7 +24,7 @@ function FindBook() {
     e.preventDefault();
     if (checkFields()) {
       alert("Finding book...");
-      console.log("Form data:", formData, typeof(formData));
+      console.log("Form data:", formData, typeof formData);
     } else {
       alert("Cannot find book.");
       console.log("Form data:", formData);
@@ -41,38 +41,60 @@ function FindBook() {
       <br />
       <form /*action="/find" method="get"*/ onSubmit={handleSubmit}>
         <div className="dropdown">
-          <button
-            className="btn btn-secondary dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Dropdown button
-          </button>
-          <ul className="dropdown-menu">
-            <li className="dropdownItem" onClick={() => changeSearchParam(1)}>
+          <select className="form-select" aria-label="Default select example">
+            <option
+              className="dropdownItem"
+              onClick={() => changeSearchParam(0)}
+              value="0"
+              selected
+            >
+              Select
+            </option>
+            <option
+              className="dropdownItem"
+              onClick={() => changeSearchParam(1)}
+              value="1"
+            >
               Book name
-            </li>
-            <li className="dropdownItem" onClick={() => changeSearchParam(2)}>
+            </option>
+            <option
+              className="dropdownItem"
+              onClick={() => changeSearchParam(2)}
+              value="2"
+            >
               Author name
-            </li>
-            <li className="dropdownItem" onClick={() => changeSearchParam(3)}>
+            </option>
+            <option
+              className="dropdownItem"
+              onClick={() => changeSearchParam(3)}
+              value="3"
+            >
               Number of pages
-            </li>
-            <li className="dropdownItem" onClick={() => changeSearchParam(4)}>
+            </option>
+            <option
+              className="dropdownItem"
+              onClick={() => changeSearchParam(4)}
+              value="4"
+            >
               Rating
-            </li>
-            <li className="dropdownItem" onClick={() => changeSearchParam(5)}>
+            </option>
+            <option
+              className="dropdownItem"
+              onClick={() => changeSearchParam(5)}
+              value="5"
+            >
               Genre
-            </li>
-          </ul>
+            </option>
+          </select>
           <input
             type="text"
             name="title"
             className="formInput"
             id="title"
             value={formData}
-            onChange={(e) => {setFormData(e.target.value);}}
+            onChange={(e) => {
+              setFormData(e.target.value);
+            }}
           />
         </div>
         <br />
