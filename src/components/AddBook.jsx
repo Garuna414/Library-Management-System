@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/addBook.css";
 
@@ -46,7 +47,6 @@ function AddBook() {
       alert("Genre is required");
       return 0;
     } else {
-      console.log(typeof formData.rating);
       return 1;
     }
   };
@@ -54,15 +54,23 @@ function AddBook() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (checkFields()) {
-      alert("Form submitted successfully");
-      console.log("Form data:", formData);
-      setFormData({
-        title: "",
-        author: "",
-        pages: "",
-        rating: "",
-        genres: "",
-      });
+      axios
+        .post("http://localhost:5000/add", formData, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }) //Without the headers field, the form doesnt work.
+        .then((res) => {
+          alert("Form submitted successfully");
+          console.log("Form data:", formData);
+          setFormData({
+            title: "",
+            author: "",
+            pages: "",
+            rating: "",
+            genres: "",
+          });
+        });
     } else {
       alert("Cannot insert book to library");
       console.log("Form data:", formData);
@@ -73,7 +81,7 @@ function AddBook() {
     <div className="addBookMainContainer">
       <h1>Add a book</h1>
       <br />
-      <form /*action="/add" method="post"*/ onSubmit={handleSubmit}>
+      <form action="/add" method="post" onSubmit={handleSubmit}>
         <div>
           <label id="title" className="labelText">
             Title of book
