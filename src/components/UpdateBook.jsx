@@ -166,7 +166,7 @@ function UpdateBook() {
             <input
               type="text"
               name="title"
-              className="formInput"
+              className="updateBookFormInput"
               id="title"
               value={formData.title}
               onChange={handleUpdateFormChange}
@@ -180,7 +180,7 @@ function UpdateBook() {
             <input
               type="text"
               name="author"
-              className="formInput"
+              className="updateBookFormInput"
               id="author"
               value={formData.author}
               onChange={handleUpdateFormChange}
@@ -194,7 +194,7 @@ function UpdateBook() {
             <input
               type="number"
               name="pages"
-              className="formInput"
+              className="updateBookFormInput"
               id="pages"
               value={formData.pages}
               onChange={handleUpdateFormChange}
@@ -208,7 +208,7 @@ function UpdateBook() {
             <input
               type="number"
               name="rating"
-              className="formInput"
+              className="updateBookFormInput"
               id="rating"
               value={formData.rating}
               onChange={handleUpdateFormChange}
@@ -222,7 +222,7 @@ function UpdateBook() {
             <input
               type="text"
               name="genres"
-              className="formInput"
+              className="updateBookFormInput"
               id="genres"
               value={formData.genres}
               onChange={handleUpdateFormChange}

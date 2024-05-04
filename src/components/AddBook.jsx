@@ -90,7 +90,7 @@ function AddBook() {
           <input
             type="text"
             name="title"
-            className="formInput"
+            className="addBookFormInput"
             id="title"
             value={formData.title}
             onChange={handleChange}
@@ -105,7 +105,7 @@ function AddBook() {
           <input
             type="text"
             name="author"
-            className="formInput"
+            className="addBookFormInput"
             id="author"
             value={formData.author}
             onChange={handleChange}
@@ -120,7 +120,7 @@ function AddBook() {
           <input
             type="number"
             name="pages"
-            className="formInput"
+            className="addBookFormInput"
             id="pages"
             value={formData.pages}
             onChange={handleChange}
@@ -135,7 +135,7 @@ function AddBook() {
           <input
             type="number"
             name="rating"
-            className="formInput"
+            className="addBookFormInput"
             id="rating"
             value={formData.rating}
             onChange={handleChange}
@@ -150,7 +150,7 @@ function AddBook() {
           <input
             type="text"
             name="genres"
-            className="formInput"
+            className="addBookFormInput"
             id="genres"
             value={formData.genres}
             onChange={handleChange}
