@@ -57,4 +57,60 @@ app.post("/add", function (req, res) {
   }
 });
 
+app.get("/find/:searchData/:searchParam", function (req, res) {
+  var searchData = req.params.searchData;
+  var searchParam = req.params.searchParam;
+  //console.log(bookInfo);
+  if (!searchData) {
+    res.send("mt");
+  } else {
+    if (parseInt(searchParam) === 0) {
+      res.send("Select a search parameter first.");
+    } else if (parseInt(searchParam) === 1) {
+      Book.find({ Name: searchData })
+        .then((book) => {
+          res.json(book);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else if (parseInt(searchParam) === 2) {
+      Book.find({ Author: searchData })
+        .then((book) => {
+          res.json(book);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else if (parseInt(searchParam) === 3) {
+      Book.find({ Pages: parseInt(searchData) })
+        .then((book) => {
+          res.json(book);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else if (parseInt(searchParam) === 4) {
+      Book.find({ Rating: parseInt(searchData) })
+        .then((book) => {
+          res.json(book);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else if (parseInt(searchParam) === 5) {
+      Book.find({ Name: searchData })
+        .then((book) => {
+          res.json(book);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    }
+    else {
+      res.send("Cannot find book");
+    }
+  }
+});
+
 app.listen(5000);

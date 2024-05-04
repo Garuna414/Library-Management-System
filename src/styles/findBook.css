@@ -3,7 +3,62 @@
     background: linear-gradient(45deg, #6369D1, #60E1E0, #D8D2E1);
     width: 100vw;
     padding: 15px;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
 }
+
+.findBookLeftContainer {
+    width: 35%;
+    height: 100%;
+}
+
+.vl {
+    border-left: 2px solid black;
+    height: 90vh;
+  }
+
+.findBookRightContainer {
+    width: 55%;
+    height: 100%;
+}
+
+.bookContainer {
+    border: 1px solid black;
+    height: 45px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 10px 0;
+}
+
+.bookId {
+    font-size: 20px;
+    margin: 0 10px;
+    font-family: monospace;
+    width: 310px;
+}
+
+.bookName {
+    font-size: 20px;
+    margin: 0 10px;
+    font-family: monospace;
+    width: 170px;
+}
+
+.bookAuthor {
+    font-size: 20px;
+    margin: 0 10px;
+    font-family: monospace;
+    width: 190px;
+}
+
+
 
 h1, select, option {
     font-family: monospace;
