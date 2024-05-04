@@ -24,7 +24,6 @@ var bookSchema = mongoose.Schema(
 var Book = mongoose.model("Book", bookSchema);
 
 app.post("/add", function (req, res) {
-  //res.sendFile(__dirname + "/form.html");
   var bookInfo = req.body; // Get the parsed information from the form
   console.log(bookInfo);
   if (
@@ -118,6 +117,32 @@ app.get("/find/:bookId", function (req, res) {
     res.send("Please enter book ID");
   } else {
     Book.findById(bookId)
+      .then((book) => {
+        res.json(book);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  }
+});
+
+app.put("/update/:bookId", function (req, res) {
+  var bookId = req.params.bookId;
+  var body = req.body;
+  if (!bookId) {
+    res.send("Please enter book ID.");
+  } else {
+    var genresArray = body.genres.split(",");
+    Book.findByIdAndUpdate(
+      { _id: bookId },
+      {
+        Name: body.title,
+        Author: body.author,
+        Pages: body.pages,
+        Rating: body.rating,
+        Genres: genresArray,
+      }
+    )
       .then((book) => {
         res.json(book);
       })
