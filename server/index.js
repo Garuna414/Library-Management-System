@@ -106,10 +106,24 @@ app.get("/find/:searchData/:searchParam", function (req, res) {
         .catch((err) => {
           res.send(err);
         });
-    }
-    else {
+    } else {
       res.send("Cannot find book");
     }
+  }
+});
+
+app.get("/find/:bookId", function (req, res) {
+  var bookId = req.params.bookId;
+  if (!bookId) {
+    res.send("Please enter book ID");
+  } else {
+    Book.findById(bookId)
+      .then((book) => {
+        res.json(book);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
   }
 });
 
