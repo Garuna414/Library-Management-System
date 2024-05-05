@@ -6,7 +6,7 @@ import axios from "axios";
 import "../styles/remBook.css";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function RemBook() {
@@ -31,7 +31,20 @@ function RemBook() {
       draggable: true,
       progress: undefined,
       theme: "light",
-      transition: "Bounce",
+      transition: Bounce,
+    });
+
+  const successDeletion = () =>
+    toast.info("Declined book deletion.", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
     });
 
   const confirmDeletion = (e) => {
@@ -66,6 +79,7 @@ function RemBook() {
         .get(`http://localhost:5000/delete/${bookId}`)
         .then((res) => {
           console.log(res);
+          successDeletion();
         })
         .catch((err) => {
           alert("Cannot find described book.");
@@ -113,7 +127,7 @@ function RemBook() {
         draggable
         pauseOnHover
         theme="light"
-        transition="Bounce"
+        transition={Bounce}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/addBook.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function AddBook() {
@@ -63,7 +63,6 @@ function AddBook() {
           },
         }) //Without the headers field, the form doesnt work.
         .then((res) => {
-          alert("Form submitted successfully");
           console.log("Form data:", formData);
           setFormData({
             title: "",
@@ -81,7 +80,7 @@ function AddBook() {
   };
 
   const notify = () =>
-    toast.success("Book updated successfully.", {
+    toast.success("Book added successfully.", {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -90,7 +89,7 @@ function AddBook() {
       draggable: true,
       progress: undefined,
       theme: "light",
-      transition: "Bounce",
+      transition: Bounce,
     });
 
   return (
@@ -186,7 +185,7 @@ function AddBook() {
         draggable
         pauseOnHover
         theme="light"
-        transition="Bounce"
+        transition={Bounce}
       />
     </div>
   );
