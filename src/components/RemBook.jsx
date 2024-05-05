@@ -35,7 +35,7 @@ function RemBook() {
     });
 
   const successDeletion = () =>
-    toast.info("Declined book deletion.", {
+    toast.success("Book deleted successfully.", {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -74,15 +74,14 @@ function RemBook() {
   const handleSubmitById = () => {
     console.log("ID entered:", bookId);
     if (checkId()) {
-      alert("Finding book...");
       axios
-        .get(`http://localhost:5000/delete/${bookId}`)
+        .delete(`http://localhost:5000/delete/${bookId}`)
         .then((res) => {
           console.log(res);
           successDeletion();
         })
         .catch((err) => {
-          alert("Cannot find described book.");
+          alert("Cannot find described book", err);
         });
     } else {
       alert("Cannot delete book.");

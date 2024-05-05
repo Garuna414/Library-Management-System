@@ -152,6 +152,19 @@ app.put("/update/:bookId", function (req, res) {
   }
 });
 
-
+app.delete("/delete/:bookId", function (req, res) {
+  var bookId = req.params.bookId;
+  if (!bookId) {
+    res.send("Please enter book ID.");
+  } else {
+    Book.findByIdAndDelete(bookId)
+      .then((book) => {
+        res.send("Book deleted successfully.");
+      })
+      .catch((err) => {
+        res.send("Error deleting book.");
+      });
+  }
+});
 
 app.listen(5000);

@@ -46,9 +46,9 @@
     transform: translateY(75px);
 }
 
-.bookContainer {
+.findBookResultContainer {
     border: 1px solid black;
-    height: 45px;
+    height: 55px;
     width: 100%;
     border-radius: 10px;
     background-color: white;

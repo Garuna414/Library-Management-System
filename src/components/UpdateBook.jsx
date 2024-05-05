@@ -56,27 +56,31 @@ function UpdateBook() {
     e.preventDefault();
     console.log("ID entered:", bookId);
     if (checkId()) {
-      alert("Finding book...");
       console.log("Form data:", formData);
       axios
         .get(`http://localhost:5000/find/${bookId}`)
         .then((res) => {
-          console.log(res);
-          setBooksById({
-            ...booksById,
-            Name: res.data.Name,
-            Author: res.data.Author,
-            Pages: res.data.Pages,
-            Rating: res.data.Rating,
-            Genres: res.data.Genres,
-          });
+          if (res.data) {
+            console.log(res);
+            setBooksById({
+              ...booksById,
+              Name: res.data.Name,
+              Author: res.data.Author,
+              Pages: res.data.Pages,
+              Rating: res.data.Rating,
+              Genres: res.data.Genres,
+            });
+          } else {
+            notify();
+          }
           console.log(booksById);
         })
         .catch((err) => {
-          alert("Cannot find described book.");
+          notify();
+          console.log(err);
         });
     } else {
-      alert("Cannot find book.");
+      notify();
       console.log("Form data:", formData);
     }
   };
@@ -109,15 +113,31 @@ function UpdateBook() {
             genres: "",
           });
           notify();
+        })
+        .catch((err) => {
+          notify();
+          console.log(err);
         });
     } else {
-      alert("Cannot update book.");
-      console.log("Form data:", formData);
+      notify();
     }
   };
 
   const notify = () =>
     toast.success("Book updated successfully.", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+
+  const failureNotify = () =>
+    toast.error("Cannot find book.", {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
