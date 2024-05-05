@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/updateBook.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function UpdateBook() {
   const [booksById, setBooksById] = useState({
@@ -109,12 +111,26 @@ function UpdateBook() {
             rating: "",
             genres: "",
           });
+          notify();
         });
     } else {
       alert("Cannot update book.");
       console.log("Form data:", formData);
     }
   };
+
+  const notify = () =>
+    toast.success("Book updated successfully.", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: "Bounce",
+    });
 
   return (
     <div className="updateBookMainContainer">
@@ -156,7 +172,7 @@ function UpdateBook() {
       </div>
       <br />
       <br />
-      <h1>Add a book</h1>
+      <h1>Update book details</h1>
       <div className="updateBookBottomContainer">
         <form onSubmit={handleUpdateFormSubmit} className="updateForm">
           <div className="formField">
@@ -232,6 +248,19 @@ function UpdateBook() {
           <input type="submit" className="submitBtn" value="Update Book" />
         </form>
       </div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition="Bounce"
+      />
     </div>
   );
 }

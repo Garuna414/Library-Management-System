@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import AddBook from "./components/AddBook";
 import FindBook from "./components/FindBook";
 import UpdateBook from "./components/UpdateBook";
+import RemBook from "./components/RemBook";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/addBook" element={<AddBook />}></Route>
           <Route exact path="/findBook" element={<FindBook />}></Route>
           <Route exact path="/updateBook" element={<UpdateBook />}></Route>
+          <Route exact path="/removeBook" element={<RemBook />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,0 +1,176 @@
+.removeBookMainContainer {
+    height: calc(100vh - 41.6px);    
+    background: linear-gradient(45deg, #6369D1, #60E1E0, #D8D2E1);
+    width: 100vw;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    gap: 10px;
+}
+
+.removeBookTopContainer {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+
+.removeBookBottomContainer {
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 5%;
+}
+
+.removeBookLeftContainer {
+    width: 35%;
+    height: 100%;
+}
+
+.vl {
+    border-left: 2px solid black;
+    height: 90vh;
+  }
+
+.bookContainer {
+    border: 1px solid black;
+    height: 45px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.updateForm {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.bookId {
+    font-size: 20px;
+    margin: 0 10px;
+    font-family: monospace;
+    width: 310px;
+}
+
+.bookName {
+    font-size: 20px;
+    margin: 0 10px;
+    font-family: monospace;
+    width: 170px;
+}
+
+.bookAuthor {
+    font-size: 20px;
+    margin: 0 10px;
+    font-family: monospace;
+    width: 200px;
+}
+
+h1, select, option {
+    font-family: monospace;
+}
+
+.dropdown {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-select {
+    width: 166px;
+}
+
+.formField {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+}
+
+.labelText {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: monospace;
+    width: 40%;
+}
+
+.formInput {
+    width: 60%;
+    border-radius: 10px;
+    padding: 0 15px;
+    margin: 0 15px;
+    font-family: monospace;
+}
+
+.removeBookFormInput {    
+    width: 60%;
+    border-radius: 10px;
+    padding: 0 15px;
+    margin: 0 15px;
+    font-family: monospace;
+}
+
+.submitBtn {
+    border-radius: 10px;
+    width: 150px;
+    font-family: monospace;
+}
+
+.submitBtn:hover {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.idSearchParamBox {
+    width: 166px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+    padding: 0 15px;
+    height: 37.6px;
+}
+
+.idSearchParam {
+    font-size: 18px;
+    font-family: monospace;
+    margin: 0;
+}
+
+.removeBookRightContainer {
+    width: 55%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bookContainerById {    
+    border: 1px solid black;
+    width: 100%;
+    border-radius: 10px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    transform: translateY(75px);
+}
+
+.bookByIdInfo {
+    font-size: 20px;
+    margin: 0 10px;
+    font-family: monospace;
+}
