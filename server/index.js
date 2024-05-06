@@ -17,6 +17,8 @@ var bookSchema = mongoose.Schema(
     Pages: Number,
     Rating: Number,
     Genres: [String],
+    Status: String,
+    Holder: String,
   },
   { collection: "Books" }
 );
@@ -43,6 +45,8 @@ app.post("/add", function (req, res) {
       Pages: bookInfo.pages,
       Rating: bookInfo.rating,
       Genres: genresArray,
+      Status: "Available",
+      Holder: "Library",
     });
 
     newBook
@@ -105,6 +109,22 @@ app.get("/find/:searchData/:searchParam", function (req, res) {
         .catch((err) => {
           res.send(err);
         });
+    } else if (parseInt(searchParam) === 6) {
+      Book.find({ Status: searchData })
+        .then((book) => {
+          res.json(book);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
+    } else if (parseInt(searchParam) === 7) {
+      Book.find({ Holder: searchData })
+        .then((book) => {
+          res.json(book);
+        })
+        .catch((err) => {
+          res.send(err);
+        });
     } else {
       res.send("Cannot find book");
     }
@@ -121,7 +141,7 @@ app.get("/find/:bookId", function (req, res) {
         res.json(book);
       })
       .catch((err) => {
-        res.send(err);
+        res.sendStatus(404);
       });
   }
 });
@@ -159,10 +179,58 @@ app.delete("/delete/:bookId", function (req, res) {
   } else {
     Book.findByIdAndDelete(bookId)
       .then((book) => {
-        res.send("Book deleted successfully.");
+        res.sendStatus(200);
       })
       .catch((err) => {
-        res.send("Error deleting book.");
+        res.sendStatus(404);
+      });
+  }
+});
+
+app.put("/borrow/:bookId", function (req, res) {
+  var bookId = req.params.bookId;
+  var body = req.body;
+  var userId = body.userId;
+  var status;
+  if (body.searchParam == 0) {
+    res.send("Please select check out method.");
+  } else if (body.searchParam == 1) {
+    status = "Borrowed";
+  } else if (body.searchParam == 2) {
+    status = "Available";
+  }
+  if (!userId) {
+    res.send("Please enter user ID.");
+  }
+  if (!bookId) {
+    res.send("Please enter book ID.");
+  } else if (body.searchParam == 1) {
+    Book.findByIdAndUpdate(
+      { _id: bookId },
+      {
+        Status: status,
+        Holder: userId,
+      }
+    )
+      .then((book) => {
+        res.json(book);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  } else if (body.searchParam == 2) {
+    Book.findByIdAndUpdate(
+      { _id: bookId },
+      {
+        Status: status,
+        Holder: "Library",
+      }
+    )
+      .then((book) => {
+        res.json(book);
+      })
+      .catch((err) => {
+        res.send(err);
       });
   }
 });

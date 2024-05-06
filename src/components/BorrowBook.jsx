@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
-import "../styles/updateBook.css";
+import "../styles/borrowBook.css";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function UpdateBook() {
+function BorrowBook() {
   const [booksById, setBooksById] = useState({
     Name: "",
     Author: "",
@@ -17,39 +17,21 @@ function UpdateBook() {
   });
   const [bookId, setBookId] = useState("");
   const [formData, setFormData] = useState({
-    title: "",
-    author: "",
-    pages: "",
-    rating: "",
-    genres: "",
-    status: "",
-    holder: "",
+    userId: "",
+    searchParam: "",
   });
 
   const checkFields = () => {
-    if (!formData.title) {
-      formData.title = booksById.Name;
+    if (!formData.userId) {
+      alert("Please enter user ID.");
+      return 0;
+    } else if (!formData.searchParam || formData.searchParam === 0) {
+      alert("Please select check out method.");
+      return 0;
+    } else {
+      console.log(formData);
+      return 1;
     }
-    if (!formData.author) {
-      formData.author = booksById.Author;
-    }
-    if (!formData.pages) {
-      formData.pages = booksById.Pages;
-    }
-    if (!formData.rating) {
-      formData.rating = booksById.Rating;
-    }
-    if (!formData.genres) {
-      formData.genres = booksById.Genres.join(",");
-    }
-    if (!formData.status) {
-      formData.status = booksById.Status;
-    }
-    if (!formData.holder) {
-      formData.holder = booksById.Holder;
-    }
-    console.log(formData);
-    return 1;
   };
 
   const checkId = () => {
@@ -70,8 +52,8 @@ function UpdateBook() {
       axios
         .get(`http://localhost:5000/find/${bookId}`)
         .then((res) => {
-          if (res.data._id) {
-            console.log("Result", res);
+          if (res.status !== 404) {
+            console.log(res);
             setBooksById({
               ...booksById,
               Name: res.data.Name,
@@ -85,6 +67,7 @@ function UpdateBook() {
           } else {
             failureNotify();
           }
+          console.log(booksById);
         })
         .catch((err) => {
           failureNotify();
@@ -96,48 +79,33 @@ function UpdateBook() {
     }
   };
 
-  const handleUpdateFormChange = (e) => {
-    const { name, value } = e.target;
-    const parsedValue =
-      name === "pages" || name === "rating" ? parseInt(value) : value;
-    setFormData({
-      ...formData,
-      [name]: parsedValue,
-    });
-  };
-
   const handleUpdateFormSubmit = (e) => {
     e.preventDefault();
     if (checkFields()) {
       axios
-        .put(`http://localhost:5000/update/${bookId}`, formData, {
+        .put(`http://localhost:5000/borrow/${bookId}`, formData, {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
           },
         }) //Without the headers field, the form doesnt work.
         .then((res) => {
           setFormData({
-            title: "",
-            author: "",
-            pages: "",
-            rating: "",
-            genres: "",
-            Status: "",
-            Holder: "",
+            ...formData,
+            userIdId: "",
           });
           notify();
         })
         .catch((err) => {
-          failureNotify();
+            checkOutFailire();
           console.log(err);
         });
     } else {
-      failureNotify();
+        checkOutFailire();
     }
   };
 
   const notify = () =>
-    toast.success("Book updated successfully.", {
+    toast.success("Book checked out successfully.", {
       position: "bottom-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -161,6 +129,26 @@ function UpdateBook() {
       theme: "light",
       transition: Bounce,
     });
+
+  const checkOutFailire = () =>
+    toast.error("Cannot check out book.", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+
+  const changeSearchParam = (value) => {
+    setFormData({
+      ...formData,
+      searchParam: parseInt(value),
+    });
+  };
 
   return (
     <div className="updateBookMainContainer">
@@ -204,80 +192,56 @@ function UpdateBook() {
       </div>
       <br />
       <br />
-      <h1>Update book details</h1>
+      <h1>Check Out Form</h1>
       <div className="updateBookBottomContainer">
         <form onSubmit={handleUpdateFormSubmit} className="updateForm">
-          <div className="formField">
+          <div className="borrowFormField">
             <label id="title" className="labelText">
-              Title of book
+              User ID
             </label>
             <input
               type="text"
               name="title"
               className="updateBookFormInput"
               id="title"
-              value={formData.title}
-              onChange={handleUpdateFormChange}
+              value={formData.userId}
+              onChange={(e) => {
+                setFormData({
+                  ...formData,
+                  userId: e.target.value,
+                });
+              }}
             />
           </div>
           <br />
-          <div className="formField">
-            <label id="author" className="labelText">
-              Author of book
-            </label>
-            <input
-              type="text"
-              name="author"
-              className="updateBookFormInput"
-              id="author"
-              value={formData.author}
-              onChange={handleUpdateFormChange}
-            />
+          <div>
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              value={formData.searchParam}
+              onChange={(e) => changeSearchParam(e.target.value)}
+            >
+              <option className="dropdownItem" defaultValue="0">
+                Select
+              </option>
+              <option
+                className="dropdownItem"
+                value="1"
+                disabled={booksById.Status !== "Available"}
+              >
+                Borrow
+              </option>
+              <option
+                className="dropdownItem"
+                value="2"
+                disabled={booksById.Status === "Available"}
+              >
+                Return
+              </option>
+            </select>
           </div>
           <br />
-          <div className="formField">
-            <label id="pages" className="labelText">
-              Number of pages
-            </label>
-            <input
-              type="number"
-              name="pages"
-              className="updateBookFormInput"
-              id="pages"
-              value={formData.pages}
-              onChange={handleUpdateFormChange}
-            />
-          </div>
-          <br />
-          <div className="formField">
-            <label id="rating" className="labelText">
-              Rating
-            </label>
-            <input
-              type="number"
-              name="rating"
-              className="updateBookFormInput"
-              id="rating"
-              value={formData.rating}
-              onChange={handleUpdateFormChange}
-            />
-          </div>
-          <br />
-          <div className="formField">
-            <label id="genre" className="labelText">
-              Comma separated genres
-            </label>
-            <input
-              type="text"
-              name="genres"
-              className="updateBookFormInput"
-              id="genres"
-              value={formData.genres}
-              onChange={handleUpdateFormChange}
-            />
-          </div>
-          <br />
-          <input type="submit" className="submitBtn" value="Update Book" />
+          <input type="submit" className="submitBtn" value="Check Out" />
         </form>
       </div>
       <ToastContainer
@@ -297,4 +261,4 @@ function UpdateBook() {
   );
 }
 
-export default UpdateBook;
+export default BorrowBook;

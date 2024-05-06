@@ -1,4 +1,4 @@
-.findBookMainContainer {
+.updateBookMainContainer {
     height: calc(100vh - 41.6px);    
     background: linear-gradient(45deg, #6369D1, #60E1E0, #D8D2E1);
     width: 100vw;
@@ -9,7 +9,7 @@
     gap: 10px;
 }
 
-.findBookTopContainer {
+.updateBookTopContainer {
     height: 50%;
     width: 100%;
     display: flex;
@@ -17,7 +17,7 @@
     gap: 5%;
 }
 
-.findBookBottomContainer {
+.updateBookBottomContainer {
     height: 50%;
     width: 100%;
     display: flex;
@@ -25,7 +25,7 @@
     gap: 5%;
 }
 
-.findBookLeftContainer {
+.updateBookLeftContainer {
     width: 35%;
     height: 100%;
 }
@@ -35,20 +35,9 @@
     height: 90vh;
   }
 
-.findBookRightContainer {
-    width: 55%;
-    max-height: 245px;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-wrap: wrap;
-    overflow-y: auto;
-    transform: translateY(75px);
-}
-
-.findBookResultContainer {
+.bookContainer {
     border: 1px solid black;
-    height: 55px;
+    height: 45px;
     width: 100%;
     border-radius: 10px;
     background-color: white;
@@ -57,6 +46,12 @@
     gap: 10px;
     align-items: center;
     justify-content: space-between;
+}
+
+.updateForm {
+    display: flex;
+    flex-direction: column;
+
 }
 
 .bookId {
@@ -80,8 +75,6 @@
     width: 200px;
 }
 
-
-
 h1, select, option {
     font-family: monospace;
 }
@@ -96,14 +89,29 @@ h1, select, option {
     width: 166px;
 }
 
+.borrowFormField {
+    display: flex;
+    flex-direction: row;
+    width: 500px;
+}
+
 .labelText {
     font-size: 18px;
     font-weight: 500;
     font-family: monospace;
+    width: 40%;
 }
 
 .formInput {
-    width: 300px;
+    width: 60%;
+    border-radius: 10px;
+    padding: 0 15px;
+    margin: 0 15px;
+    font-family: monospace;
+}
+
+.updateBookFormInput {    
+    width: 60%;
     border-radius: 10px;
     padding: 0 15px;
     margin: 0 15px;
@@ -139,7 +147,7 @@ h1, select, option {
     margin: 0;
 }
 
-.findBookRightContainerById {
+.updateBookRightContainer {
     width: 55%;
     height: 100%;
     display: flex;
@@ -158,8 +166,7 @@ h1, select, option {
     align-items: baseline;
     justify-content: space-between;
     flex-wrap: wrap;
-    transform: translateY(75px);    
-    max-height: 191.6px;
+    transform: translateY(75px);
 }
 
 .bookByIdInfo {
@@ -167,14 +174,3 @@ h1, select, option {
     margin: 0 10px;
     font-family: monospace;
 }
-
-/* .dropdownItem {
-    margin: 0 10px;
-    border-radius: 5px;
-    padding: 0 10px;
-}
-
-.dropdownItem:hover {
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.1);
-} */

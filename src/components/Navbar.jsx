@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "../styles/navbar.css";
 
@@ -46,6 +46,11 @@ function Navbar() {
             <li className="nav-item">
               <NavLink to="/removeBook" className="navLink normal-weight">
                 Remove Book
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/borrowBook" className="navLink normal-weight">
+                Borrow Book
               </NavLink>
             </li>
           </ul>

@@ -47,6 +47,19 @@ function RemBook() {
       transition: Bounce,
     });
 
+  const failureDeletion = () =>
+    toast.error("Book not found.", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      transition: Bounce,
+    });
+
   const confirmDeletion = (e) => {
     e.preventDefault();
     if (checkId()) {
@@ -77,14 +90,21 @@ function RemBook() {
       axios
         .delete(`http://localhost:5000/delete/${bookId}`)
         .then((res) => {
-          console.log(res);
-          successDeletion();
+          console.log("Deletion result", res);
+          if (res.status === 200) {
+            console.log(res);
+            successDeletion();
+          } else {
+            failureDeletion();
+          }
         })
         .catch((err) => {
-          alert("Cannot find described book", err);
+          console.log("Cannot find described book", err);
+          failureDeletion();
         });
     } else {
-      alert("Cannot delete book.");
+      console.log("Cannot delete book.");
+      failureDeletion();
     }
   };
 

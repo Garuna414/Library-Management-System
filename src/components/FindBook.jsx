@@ -13,6 +13,8 @@ function FindBook() {
     Pages: "",
     Rating: "",
     Genres: [],
+    Status: "",
+    Holder: "",
   });
   const [bookId, setBookId] = useState("");
   const [formData, setFormData] = useState({
@@ -29,7 +31,6 @@ function FindBook() {
       alert("Please select a search parameter");
       return 0;
     } else {
-      console.log(typeof formData.rating);
       return 1;
     }
   };
@@ -48,13 +49,14 @@ function FindBook() {
     e.preventDefault();
     console.log("Form data:", formData);
     if (checkFields()) {
+      setBooks([]);
       console.log("Form data:", formData);
       axios
         .get(
           `http://localhost:5000/find/${formData.searchData}/${formData.searchParam}`
         )
         .then((res) => {
-          if (res.data.length != 0) {
+          if (res.data.length !== 0) {
             console.log(res);
             setBooks(res.data);
           } else {
@@ -82,6 +84,8 @@ function FindBook() {
         Pages: "",
         Rating: "",
         Genres: "",
+        Status: "",
+        Holder: "",
       });
       console.log("Form data:", formData);
       axios
@@ -96,6 +100,8 @@ function FindBook() {
               Pages: res.data.Pages,
               Rating: res.data.Rating,
               Genres: res.data.Genres,
+              Status: res.data.Status,
+              Holder: res.data.Holder,
             });
           } else {
             notify();
@@ -172,6 +178,12 @@ function FindBook() {
                 <option className="dropdownItem" value="5">
                   Genre
                 </option>
+                <option className="dropdownItem" value="6">
+                  Status
+                </option>
+                <option className="dropdownItem" value="7">
+                  Holder
+                </option>
               </select>
               <input
                 type="text"
@@ -191,7 +203,7 @@ function FindBook() {
             <div className="findBookResultContainer">
               <p className="bookId">ID: {book._id}</p>
               <p className="bookName">Name: {book.Name}</p>
-              <p className="bookAuthor">Author: {book.Author}</p>
+              <p className="bookAuthor">Status: {book.Status}</p>
             </div>
           ))}
         </div>
@@ -229,6 +241,8 @@ function FindBook() {
             <p className="bookByIdInfo">
               Genres: {booksById.Genres && booksById.Genres.join(", ")}
             </p>
+            <p className="bookByIdInfo">Status: {booksById.Status}</p>
+            <p className="bookByIdInfo">Holder: {booksById.Holder}</p>
           </div>
         </div>
       </div>
